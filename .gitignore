@@ -1,0 +1,17 @@
+# Build / IDE
+**/out/
+**/*.class
+.idea/
+*.iml
+.vscode/
+
+# macOS
+.DS_Store
+
+# Local evidence — keep on laptop only
+notes/screenshots/
+
+# Secrets — never commit
+.env
+**/kubeconfig*
+**/*secret*
