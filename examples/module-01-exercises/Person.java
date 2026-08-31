@@ -4,17 +4,20 @@ public class Person {
     int age;
 
     public Person(String name, int age) {
-        // TODO: assign this.name / this.age
-        throw new UnsupportedOperationException("TODO");
+        // FIX: assign this.name / this.age
+        this.name = name;
+        this.age = age;
     }
 
     public void display() {
-        // TODO: print "<name> is <age> years old"
-        throw new UnsupportedOperationException("TODO");
+        // FIX: print "<name> is <age> years old"
+        System.out.println(name + " is " + age + " years old");
     }
 
     public static void main(String[] args) {
         // TODO: create Person("Aman", 21) and call display()
-        throw new UnsupportedOperationException("TODO");
+        Person person = new Person("Aman", 21);
+        person.display();
+
     }
 }
