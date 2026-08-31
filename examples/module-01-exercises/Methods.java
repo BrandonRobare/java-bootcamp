@@ -1,17 +1,20 @@
 public class Methods {
     public static void main(String[] args) {
-        // TODO: int sum = add(10, 20); then print sum
-        // TODO: String message = greet("Aman"); then print message
-        throw new UnsupportedOperationException("TODO: call add and greet");
+        // FIX: int sum = add(10, 20); then print sum
+        int sum = add(10, 20);
+        System.out.println(sum);
+        // FIX: String message = greet("Aman"); then print message
+        String message = greet("Aman");
+        System.out.println(message);
     }
 
     public static int add(int a, int b) {
-        // TODO: return a + b
-        throw new UnsupportedOperationException("TODO");
+        // FIX: return a + b
+        return a + b;
     }
 
     public static String greet(String name) {
-        // TODO: return "Hello, " + name + "!"
-        throw new UnsupportedOperationException("TODO");
+        // FIX: return "Hello, " + name + "!"
+        return "Hello, " + name + "!";
     }
 }
