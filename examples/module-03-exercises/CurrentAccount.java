@@ -1,28 +1,17 @@
 public class CurrentAccount extends Account {
-    private static final double OVERDRAFT_LIMIT = 500.00;
+    private static final double WITHDRAWAL_FEE = 2.00;
 
     public CurrentAccount(double initialBalance) {
         super(initialBalance);
     }
 
     @Override
-    public String getAccountType() {
-        return "Current";
+    public boolean withdraw(double amount) {
+        return super.withdraw(amount + WITHDRAWAL_FEE);
     }
 
     @Override
-    public boolean withdraw(double amount) {
-        if (amount <= 0) {
-            System.out.println("withdrawal amount must be positive");
-            return false;
-        }
-        if (getBalance() - amount < -OVERDRAFT_LIMIT) {
-            System.out.printf(
-                    "current withdrawal rejected: overdraft limit is %.2f%n",
-                    OVERDRAFT_LIMIT);
-            return false;
-        }
-        setBalance(getBalance() - amount);
-        return true;
+    public String getAccountType() {
+        return "Current";
     }
 }

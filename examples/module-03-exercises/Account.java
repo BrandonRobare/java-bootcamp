@@ -36,10 +36,6 @@ public class Account {
         return balance;
     }
 
-    protected void setBalance(double newBalance) {
-        balance = newBalance;
-    }
-
     // Exercise 3 will override this method
     public String getAccountType() {
         return "Account";
