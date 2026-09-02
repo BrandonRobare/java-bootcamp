@@ -36,6 +36,13 @@ public class Account {
         return balance;
     }
 
+    // Exercise 3: a subclass that redefines what a *valid* balance is (overdraft)
+    // has to be able to write it. protected keeps that inside the hierarchy —
+    // outside code still cannot touch the balance.
+    protected void setBalance(double newBalance) {
+        balance = newBalance;
+    }
+
     // Exercise 3 will override this method
     public String getAccountType() {
         return "Account";
