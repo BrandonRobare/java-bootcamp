@@ -19,8 +19,8 @@ public class SavingsAccount extends Account implements Printable {
 
     @Override
     public double calculateInterest() {
-        // TODO: return getBalance() * interestRate / 100.0
-        throw new UnsupportedOperationException("TODO");
+        // DONE: return getBalance() * interestRate / 100.0
+        return getBalance() * interestRate / 100.0;
     }
 
     @Override

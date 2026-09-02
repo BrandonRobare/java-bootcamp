@@ -37,15 +37,23 @@ public abstract class Account {
     }
 
     public void deposit(double amount) {
-        // TODO: reject amount <= 0; otherwise add amount to balance
-        throw new UnsupportedOperationException("TODO");
+        // DONE: reject amount <= 0; otherwise add amount to balance
+        if (amount <= 0) {
+            return;
+        } else {
+            setBalance(getBalance() + amount);
+        }
     }
 
     public boolean withdraw(double amount) {
-        // TODO: reject amount <= 0
-        // TODO: totalDeduction = amount + calculateCharges(); fail if > balance
-        // TODO: subtract totalDeduction from balance; return true/false
-        throw new UnsupportedOperationException("TODO");
+        // DONE: reject amount <= 0
+        if (amount <= 0) { return false; }
+        // DONE: totalDeduction = amount + calculateCharges(); fail if > balance
+        double totalDeduction = amount + calculateCharges();
+        if (totalDeduction > getBalance()) { return false; }
+        // DONE: subtract totalDeduction from balance; return true/false
+        setBalance(getBalance() - totalDeduction);
+        return true;
     }
 
     public abstract void displayAccount();
