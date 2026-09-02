@@ -1,4 +1,4 @@
-package src.com.academy.student;
+package com.academy.student;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -34,27 +34,63 @@ public class StudentManager {
     }
 
     public void addStudent() {
-        // TODO: reject when studentCount >= MAX_STUDENTS
-        // TODO: read studentId (positive int); reject duplicate IDs via findStudentIndex
-        // TODO: read name, course, marks; store new Student at students[studentCount++]
-        // TODO: print "Student Added Successfully."
-        throw new UnsupportedOperationException("TODO");
+        // DONE: reject when studentCount >= MAX_STUDENTS
+        // DONE: read studentId (positive int); reject duplicate IDs via findStudentIndex
+        // DONE: read name, course, marks; store new Student at students[studentCount++]
+        // DONE: print "Student Added Successfully."
+        if (studentCount >= MAX_STUDENTS) {
+            System.out.println("Student list is full.");
+        } else {
+            System.out.print("Student ID : ");
+            int id = readPositiveInt();
+            if (findStudentIndex(id) != -1) {
+                System.out.println("Student ID already exists.");
+                return;
+            }
+
+            String name = readNonEmptyLine("Name : ");
+            String course = readNonEmptyLine("Course : ");
+            double marks = readValidMarks();
+
+            students[studentCount++] = new Student(id, name, course, marks);
+            System.out.println("Student Added Successfully.");
+        }
     }
 
     public void displayStudents() {
-        // TODO: if empty, print "No students to display."
-        // TODO: otherwise call printStudentTable(students, studentCount, false)
-        throw new UnsupportedOperationException("TODO");
+        // DONE: if empty, print "No students to display."
+        // DONE: otherwise call printStudentTable(students, studentCount, false)
+        if (studentCount == 0) {
+            System.out.println("No students to display.");
+        } else {
+            printStudentTable(students, studentCount, false);
+        }
     }
 
     public void searchStudent() {
-        // TODO: read Student ID; find index; print display() or "Student Not Found."
-        throw new UnsupportedOperationException("TODO");
+        // DONE: read Student ID; find index; print display() or "Student Not Found."
+        System.out.print("Student ID : ");
+        int id = readPositiveInt();
+        int index = findStudentIndex(id);
+        if (index == -1) {
+            System.out.println("Student Not Found.");
+        } else {
+            students[index].display();
+        }
     }
 
     public void calculateAverage() {
-        // TODO: average of students[0..studentCount); printf "Average Marks : %.2f%n"
-        throw new UnsupportedOperationException("TODO");
+        // DONE: average of students[0..studentCount); printf "Average Marks : %.2f%n"
+        if (studentCount == 0) {
+            System.out.println("No students available.");
+            return;
+        }
+
+        double markSum = 0;
+        for (int i = 0; i < studentCount; i++) {
+            markSum += students[i].getMarks();
+        }
+        System.out.printf("Average Marks : %.2f%n", markSum / studentCount);
     }
 
     public void displayTopStudent() {

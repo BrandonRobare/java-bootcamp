@@ -1,4 +1,4 @@
-package src.com.academy.student;
+package com.academy.student;
 
 public class Student {
 
