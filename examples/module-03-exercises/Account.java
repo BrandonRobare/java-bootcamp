@@ -1,5 +1,5 @@
 public class Account {
-    // TODO: hide balance from outside code (private field already shown — focus on methods)
+    // DONE: hide balance from outside code (private field already shown — focus on methods)
     private double balance;
 
     public Account(double initialBalance) {
@@ -11,16 +11,27 @@ public class Account {
     }
 
     public void deposit(double amount) {
-        // TODO: reject non-positive amounts (print message, return early)
-        throw new UnsupportedOperationException("TODO");
+        // DONE: reject non-positive amounts (print message, return early)
+        if (amount <= 0) {
+            System.out.println("deposit amount must be positive");
+            return;
+        } else {
+            balance += amount;
+        }
     }
 
     public boolean withdraw(double amount) {
-        // TODO: reject if amount <= 0 OR amount > balance
-        throw new UnsupportedOperationException("TODO");
+        // DONE: reject if amount <= 0 OR amount > balance
+        if (amount <= 0 || amount > balance) {
+            System.out.println("you do not have the funds to withdraw");
+            return false;
+        } else {
+            balance -= amount;
+            return true;
+        }
     }
 
-    // TODO: read-only accessor — return balance
+    // DONE: read-only accessor — return balance
     public double getBalance() {
         return balance;
     }
