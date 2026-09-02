@@ -18,8 +18,6 @@ class Animal {
 
 //subclass
 class Dog extends Animal {
-    // NO 'String name' here — redeclaring it would HIDE Animal.name, not override it,
-    // and Animal's eat()/sleep() would keep printing Animal's copy.
     String breed;
 
     // constructor

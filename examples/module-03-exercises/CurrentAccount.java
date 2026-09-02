@@ -1,5 +1,4 @@
 public class CurrentAccount extends Account {
-    // A current account may go negative, but only this far.
     private static final double OVERDRAFT_LIMIT = 500.00;
 
     public CurrentAccount(double initialBalance) {
@@ -13,8 +12,6 @@ public class CurrentAccount extends Account {
 
     @Override
     public boolean withdraw(double amount) {
-        // No super.withdraw() here: Account refuses amount > balance, which is exactly
-        // the rule an overdraft exists to relax. The amount check still has to happen.
         if (amount <= 0) {
             System.out.println("withdrawal amount must be positive");
             return false;
