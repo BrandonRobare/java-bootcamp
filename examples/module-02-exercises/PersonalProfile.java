@@ -2,9 +2,30 @@ import java.util.Scanner;
 
 public class PersonalProfile {
     public static void main(String[] args) {
+        // DONE: Scanner scanner = new Scanner(System.in);
         Scanner scanner = new Scanner(System.in);
-        // TODO: read name, age, city, hobby
-        // TODO: printf aligned Field | Value table
-        throw new UnsupportedOperationException("TODO");
+
+        // DONE: read name, age, city, hobby
+        System.out.print("Name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Age: ");
+        int age = Integer.parseInt(scanner.nextLine());
+
+        System.out.print("City: ");
+        String city = scanner.nextLine();
+
+        System.out.print("Hobby: ");
+        String hobby = scanner.nextLine();
+
+        // DONE: aligned table — %-12s left-aligns in a 12-char field
+        System.out.printf("%-12s | %-20s%n", "Field", "Value");
+        System.out.println("-------------|---------------------");
+        System.out.printf("%-12s | %-20s%n", "Name", name);
+        System.out.printf("%-12s | %-20d%n", "Age", age);
+        System.out.printf("%-12s | %-20s%n", "City", city);
+        System.out.printf("%-12s | %-20s%n", "Hobby", hobby);
+
+        scanner.close();
     }
 }
