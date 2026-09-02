@@ -63,8 +63,31 @@ class Bank {
         this.bankName = "Trusted Bank";
     }
 
-    public String getAccountNumber() {             // the only way in from outside
+    // slide 22 -- getters read, setters validate before writing
+    // The check belongs in the setter because the field is private
+    // Getters need no check the field was valid when it was stored
+    public String getAccountNumber() {             // the only way to read it
         return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        if (accountNumber != null && !accountNumber.isBlank()) {
+            this.accountNumber = accountNumber;
+        } else {
+            System.out.println("Invalid account number!");
+        }
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        if (balance >= 0) {
+            this.balance = balance;
+        } else {
+            System.out.println("Balance cannot be negative!");
+        }
     }
 
     void display() {
@@ -89,5 +112,10 @@ public class constructorsPractice {
         System.out.println(b.balance);             // default: fine, same package
         // System.out.println(b.accountNumber);    // private: won't compile
         System.out.println(b.getAccountNumber());  // go through the getter instead
+
+        b.setBalance(500.0);                       // accepted
+        b.setBalance(-1);                          // rejected, balance unchanged
+        b.setAccountNumber("  ");                  // rejected
+        b.display();
     }
 }
