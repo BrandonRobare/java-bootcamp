@@ -6,13 +6,13 @@ public class FrozenAccount extends Account {
 
     @Override
     public boolean withdraw(double amount) {
-        // TODO: refuse every withdrawal; return false (do not call super.withdraw)
-        throw new UnsupportedOperationException("TODO");
+        // DONE: refuse every withdrawal; return false (do not call super.withdraw)
+        return false;
     }
 
     @Override
     public String getAccountType() {
-        // TODO: return "Frozen"
-        throw new UnsupportedOperationException("TODO");
+        // DONE: return "Frozen"
+        return "Frozen";
     }
 }
