@@ -45,21 +45,30 @@ class Student {
 }
 
 // slide 18 -- this() calls another constructor, must be the first statement
+// slides 20-21 -- all four access modifiers on one class
 class Bank {
-    String name;
-    double balance;
+    private String accountNumber;   // this class only
+    double balance;                 // default: same package
+    protected double interestRate;  // package + subclasses
+    public String bankName;         // everyone
 
-    Bank(String name) {
-        this(name, 0.0);
+    Bank(String accountNumber) {
+        this(accountNumber, 0.0);
     }
 
-    Bank(String name, double balance) {          // only this one assigns
-        this.name = name;
+    Bank(String accountNumber, double balance) {   // only this one assigns
+        this.accountNumber = accountNumber;
         this.balance = balance;
+        this.interestRate = 4.5;
+        this.bankName = "Trusted Bank";
+    }
+
+    public String getAccountNumber() {             // the only way in from outside
+        return accountNumber;
     }
 
     void display() {
-        System.out.printf("%s: %.2f%n", name, balance);
+        System.out.printf("%s %s: %.2f @ %.1f%%%n", bankName, accountNumber, balance, interestRate);
     }
 }
 
@@ -72,7 +81,13 @@ public class constructorsPractice {
         new Student("Alice").display();
         new Student("Bob", 21).display();
 
-        new Bank("PNC").display();
-        new Bank("PNC", 2500.75).display();
+        Bank b = new Bank("PNC-001");
+        b.display();
+        new Bank("PNC-002", 2500.75).display();
+
+        System.out.println(b.bankName);            // public: fine
+        System.out.println(b.balance);             // default: fine, same package
+        // System.out.println(b.accountNumber);    // private: won't compile
+        System.out.println(b.getAccountNumber());  // go through the getter instead
     }
 }
