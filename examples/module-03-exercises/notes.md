@@ -34,3 +34,12 @@ with different limits, the rule stays with the class that knows it.
 
 Menu option, printed line, and the database are implementation and infrastructure, not
 things the banking domain gives an identity to.
+
+Module 3 - Exercise 6
+
+## SRP spot-check
+
+The original method could change because the formula changes or because
+the output format changes. These are separate responsibilities.
+
+> `Main` should manage menu input, `BankService` should coordinate banking operations, and domain classes should protect their own state.
