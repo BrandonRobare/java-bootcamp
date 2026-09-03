@@ -73,28 +73,60 @@ public class BankService {
         Customer customer = readExistingCustomer();
         if (customer == null) { return; }
         double initialBalance = readPositiveAmount("Initial Balance : ");
-        double transactionFee = readPositiveAmount("Initial Transaction Fee : ");
+        double transactionFee = readPositiveAmount("Transaction Fee : ");
 
-        // TODO: create CurrentAccount with nextAccountNumber++; store in accounts[]
-        Account CurrentAccount = new
+        // DONE: create CurrentAccount with nextAccountNumber++; store in accounts[]
+        String accountNumber = String.valueOf(nextAccountNumber++);
+        accounts[accountCount++] = new CurrentAccount(accountNumber, initialBalance, customer, transactionFee);
 
+        System.out.println("Current Account Created.");
+        System.out.println("Account Number : " + accountNumber);
+        System.out.printf("Balance : %.0f%n", initialBalance);
+        System.out.printf("Transaction Fee : %.0f%n", transactionFee);
     }
 
     public void deposit() {
-        // TODO: read existing account + amount; account.deposit; recordTransaction DEPOSIT
-        // TODO: print updated balance
-        throw new UnsupportedOperationException("TODO");
+        // DONE: read existing account + amount; account.deposit; recordTransaction DEPOSIT
+        Account account = readExistingAccount();
+        if (account == null) { return; }
+        double amount = readPositiveAmount("Deposit Amount : ");
+        account.deposit(amount);
+        recordTransaction(account.getAccountNumber(), amount, "DEPOSIT");
+
+        // DONE: print updated balance
+        System.out.printf("Balance Updated : %.0f%n", account.getBalance());
     }
 
     public void withdraw() {
-        // TODO: read existing account + amount; account.withdraw; record on success
-        // TODO: for CurrentAccount, print fee + total deducted; print updated balance
-        throw new UnsupportedOperationException("TODO");
+        // DONE: read existing account + amount; account.withdraw; record on success
+        Account account = readExistingAccount();
+        if (account == null) { return; }
+        double amount = readPositiveAmount("Withdraw : ");
+        // DONE: for CurrentAccount, print fee + total deducted; print updated balance
+        if (account.withdraw(amount)) {
+            recordTransaction(account.getAccountNumber(), amount, "WITHDRAW");
+            double fee = account.calculateCharges();
+            if (fee > 0) {
+                System.out.printf("Transaction Fee : %.0f%n", fee);
+                System.out.printf("Total Deducted : %.0f%n", amount + fee);
+            }
+            System.out.printf("Balance Updated : %.0f%n", account.getBalance());
+        } else {
+            System.out.println("Insufficient funds.");
+        }
     }
 
     public void displayAccounts() {
-        // TODO: if empty print message; else loop displayAccount() for each
-        throw new UnsupportedOperationException("TODO");
+        // DONE: if empty print message; else loop displayAccount() for each
+        if (accountCount == 0) {
+            System.out.println("No account available.");
+            return;
+        } else {
+            for (int i = 0; i < accountCount; i++) {
+                accounts[i].displayAccount();
+                System.out.println("----------------------------------");
+            }
+        }
     }
 
     public void displayCustomers() {
