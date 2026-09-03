@@ -64,3 +64,14 @@ Before: 2 MB
 Retained objects: 10000
 After allocation: 12 MB
 After clear (approx): 1 MB
+
+## Exercise 7 — String vs StringBuilder
+
+| Run | String ms | StringBuilder ms |
+| --- | --------- | ---------------- |
+| 1 | 68.452 | 1.033 |
+| 2 | 64.115 | 1.041 |
+| 3 | 69.320 | 1.006 |
+
+Use StringBuilder when constructing text repeatedly in a loop. Ordinary +
+remains readable and appropriate for a small, fixed expression.
