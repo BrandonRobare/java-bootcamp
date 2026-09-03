@@ -1,6 +1,6 @@
 # Module 4 notes
 
-## Exercise 4 — Select and Verify G1
+## Exercise 4 - Select and Verify G1
 
 Command:
 java -XX:+UseG1GC -Xms16m -Xmx64m -Xlog:gc GcObserve
@@ -17,7 +17,7 @@ Excerpt:
 Completed round 20
 Allocated bytes over time: 262144000
 
-## Exercise 5 — Select and Verify ZGC
+## Exercise 5 - Select and Verify ZGC
 
 Command:
 java -XX:+UseZGC -Xms16m -Xmx64m -Xlog:gc GcObserve
@@ -44,3 +44,23 @@ Completed round 15
 [0.053s][info][gc] GC(3) Garbage Collection (Allocation Stall) 64M(100%)->32M(50%)
 Completed round 20
 Allocated bytes over time: 262144000
+
+## Exercise 6 - Retained References (Safe Leak Sketch)
+
+Retaining path:
+loaded RetentionDemo class
+  → static CACHE field
+  → ArrayList entries
+  → byte[] objects
+
+Root cause: a long-lived static collection retained strong references after
+the data was no longer needed. GC could not reclaim reachable entries.
+
+Fix: clear/remove entries, bound the cache, apply eviction, or use a more
+appropriate lifecycle. Weak references are not a universal cache fix.
+
+Output:
+Before: 2 MB
+Retained objects: 10000
+After allocation: 12 MB
+After clear (approx): 1 MB
