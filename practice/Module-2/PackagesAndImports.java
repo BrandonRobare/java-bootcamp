@@ -6,7 +6,7 @@ import java.util.*;      // ON-DEMAND import
 import bank.Account;     // SINGLE-TYPE import
 import bank.*;           // ON-DEMAND import
 
-public class packagesAndImports {
+public class PackagesAndImports {
     public static void main(String[] args) {
         // java.lang is imported automatically because String, System and Math don't need an import
         System.out.println("no import needed (java.lang): Math.max(3, 9) = " + Math.max(3, 9));

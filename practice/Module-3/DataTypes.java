@@ -9,7 +9,7 @@ class Car {
     }
 }
 
-public class dataTypes {
+public class DataTypes {
     public static void main(String[] args) {
         Car myCar = new Car(); //obj
         myCar.color = "Red";

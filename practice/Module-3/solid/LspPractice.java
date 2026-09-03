@@ -1,4 +1,4 @@
-public class lspPractice {
+public class LspPractice {
 
     // Violates LSP - Square breaks Rectangle's contract
     static class Bad {

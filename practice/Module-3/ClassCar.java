@@ -17,7 +17,7 @@ class Car {
 
 // slide 12
 //creating objects
-public class classCar {
+public class ClassCar {
     public static void main(String[] args) {
 
         //creating objects of class Car

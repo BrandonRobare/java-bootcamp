@@ -1,4 +1,4 @@
-public class dipPractice {
+public class DipPractice {
 
     // Tight coupling to a concrete class
     static class Bad {

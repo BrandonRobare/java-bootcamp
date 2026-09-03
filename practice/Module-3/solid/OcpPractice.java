@@ -1,4 +1,4 @@
-public class ocpPractice {
+public class OcpPractice {
 
     // Violates OCP - must edit for every shape
     static class Bad {

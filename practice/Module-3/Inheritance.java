@@ -19,7 +19,7 @@ class Car extends Vehicle {
     }
 }
 
-public class inheritance {
+public class Inheritance {
     public static void main(String[] args) {
         Car myCar = new Car();
         myCar.start(); myCar.stop(); // inherited

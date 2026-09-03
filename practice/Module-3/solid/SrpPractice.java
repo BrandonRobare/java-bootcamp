@@ -1,4 +1,4 @@
-public class srpPractice {
+public class SrpPractice {
 
     // Bad: one class, two responsibilities
     static class Bad {

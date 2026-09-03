@@ -1,4 +1,4 @@
-public class arithmeticOperators {
+public class ArithmeticOperators {
     public static void main(String[] args) {
         // integer division
         int p = 7 / 2;

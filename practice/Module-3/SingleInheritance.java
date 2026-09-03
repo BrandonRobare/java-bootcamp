@@ -31,7 +31,7 @@ class Dog extends Animal {
     }
 }
 
-public class singleInheritance {
+public class SingleInheritance {
     public static void main(String[] args) {
         Dog d = new Dog();
 

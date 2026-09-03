@@ -19,7 +19,7 @@ class Student {
 }
 
 
-public class customObjSet {
+public class CustomObjSetDemo {
     public static void main(String[] args) {
         Set<String> a = Set.of("A","B","C");
         Set<String> b = Set.of("B","C","D");

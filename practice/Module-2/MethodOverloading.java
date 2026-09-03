@@ -1,4 +1,4 @@
-class methodCalculator {
+class MethodCalculator {
     // Method 1: two int parameters
     int add(int a, int b) {
         return a + b;

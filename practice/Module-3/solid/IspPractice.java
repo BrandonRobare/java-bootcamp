@@ -1,4 +1,4 @@
-public class ispPractice {
+public class IspPractice {
 
     // Fat interface forces unused methods
     static class Bad {

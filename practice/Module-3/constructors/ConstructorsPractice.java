@@ -1,5 +1,5 @@
 // Module 3, slides 16-18 -- constructors.
-// Own folder: Module-3/classCar.java already declares a class named Car.
+// Own folder: Module-3/ClassCar.java already declares a class named Car.
 
 // slide 16 -- default + parameterized
 class Car {
@@ -95,7 +95,7 @@ class Bank {
     }
 }
 
-public class constructorsPractice {
+public class ConstructorsPractice {
     public static void main(String[] args) {
         new Car().display();
         new Car("Toyota", 120).display();

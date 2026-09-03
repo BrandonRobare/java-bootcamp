@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class referenceDataTypesPractice {
+public class ReferenceDataTypesPractice {
 
     // A user-defined class — the objects our references will point to
     static class Employee {

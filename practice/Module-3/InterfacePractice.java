@@ -52,7 +52,7 @@ class Square implements Drawable {
     }
 }
 
-public class interfacePractice {
+public class InterfacePractice {
     public static void main(String[] args) {
         Drawable.help();
 

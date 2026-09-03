@@ -1,4 +1,4 @@
-public class parametersReturn {
+public class ParametersReturn {
     // parameters and returns
     static int multiply(int a, int b) { // a and b are parameters
         return a * b; //return statement
@@ -11,8 +11,8 @@ public class parametersReturn {
 
     // returns a reference type
     // Employee has only the default no-arg constructor
-    static referenceDataTypesPractice.Employee createEmployee(String name) {
-        referenceDataTypesPractice.Employee employee = new referenceDataTypesPractice.Employee();
+    static ReferenceDataTypesPractice.Employee createEmployee(String name) {
+        ReferenceDataTypesPractice.Employee employee = new ReferenceDataTypesPractice.Employee();
         employee.name = name;
         return employee;
     }
@@ -25,7 +25,7 @@ public class parametersReturn {
         int num2 = 6;
         System.out.println(multiply(num1, num2));
 
-        referenceDataTypesPractice.Employee emp = createEmployee("Anita");
+        ReferenceDataTypesPractice.Employee emp = createEmployee("Anita");
         System.out.println("createEmployee returned: " + emp.name);
     }
 }

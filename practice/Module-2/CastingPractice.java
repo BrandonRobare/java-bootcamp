@@ -1,4 +1,4 @@
-public class castingPractice {
+public class CastingPractice {
     public static void main(String[] args) {
         // Widening (implicit) - compiler does it, no data loss
         int i = 100;

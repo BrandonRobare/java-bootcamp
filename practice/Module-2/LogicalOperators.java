@@ -1,4 +1,4 @@
-public class logicalOperators {
+public class LogicalOperators {
 
     // helper that prints when it runs
     static boolean check(String label, boolean value) {

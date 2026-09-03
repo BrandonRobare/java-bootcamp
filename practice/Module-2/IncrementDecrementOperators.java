@@ -1,4 +1,4 @@
-public class incrementDecrementOperators {
+public class IncrementDecrementOperators {
     public static void main(String[] args) {
         // Prefix: increment FIRST, then hand back the new value
         int a = 5;
