@@ -65,7 +65,7 @@ Retained objects: 10000
 After allocation: 12 MB
 After clear (approx): 1 MB
 
-## Exercise 7 — String vs StringBuilder
+## Exercise 7 - String vs StringBuilder
 
 | Run | String ms | StringBuilder ms |
 | --- | --------- | ---------------- |
