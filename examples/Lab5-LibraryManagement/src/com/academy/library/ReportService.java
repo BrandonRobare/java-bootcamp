@@ -14,9 +14,17 @@ public class ReportService {
     }
 
     public void displaySummaryReport() {
-        // TODO: compute totalBooks, borrowedBooks, availableBooks, totalMembers
-        // TODO: findMostPopularCategory(); print Reports block matching solution format
-        throw new UnsupportedOperationException("TODO");
+        int totalBooks = libraryService.getBooks().size();
+        int borrowedBooks = libraryService.getBorrowRecords().size();
+        int availableBooks = totalBooks - borrowedBooks;
+        int totalMembers = libraryService.getMembers().size();
+
+        System.out.println("Reports");
+        System.out.println("Books : " + totalBooks);
+        System.out.println("Borrowed : " + borrowedBooks);
+        System.out.println("Available : " + availableBooks);
+        System.out.println("Members : " + totalMembers);
+        System.out.println("Most Popular Category : " + findMostPopularCategory());
     }
 
     public Path exportReportToFile(String fileName) throws IOException {
@@ -26,7 +34,9 @@ public class ReportService {
     }
 
     private String findMostPopularCategory() {
-        // TODO: max entry by value from getCategoryBookCount(); orElse "N/A"
-        throw new UnsupportedOperationException("TODO");
+        return libraryService.getCategoryBookCount().entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse("N/A");
     }
 }
