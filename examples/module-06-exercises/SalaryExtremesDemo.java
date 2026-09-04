@@ -6,15 +6,13 @@ public class SalaryExtremesDemo {
     public static void main(String[] args) {
         List<Employee> employees = EmployeeData.sample();
 
-        // TODO: max by salary
-        Optional<Employee> highest = employees.stream()
-                // TODO: .max(...)
-                ;
+        Comparator<Employee> bySalary = Comparator.comparingDouble(Employee::salary);
 
-        // TODO: min by salary — new stream
+        Optional<Employee> highest = employees.stream()
+                .max(bySalary);
+
         Optional<Employee> lowest = employees.stream()
-                // TODO: .min(...)
-                ;
+                .min(bySalary);
 
         highest.ifPresent(e -> System.out.printf("Highest: %s - %.0f%n", e.name(), e.salary()));
         lowest.ifPresent(e -> System.out.printf("Lowest: %s - %.0f%n", e.name(), e.salary()));
