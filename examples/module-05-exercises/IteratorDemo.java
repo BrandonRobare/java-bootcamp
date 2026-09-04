@@ -4,19 +4,20 @@ import java.util.List;
 
 public class IteratorDemo {
     public static void main(String[] args) {
-        // TODO: wrap List.of(...) in new ArrayList<>(...) so removal is allowed
-        List<String> titles = _____;
+        // DONE: wrap List.of(...) in new ArrayList<>(...) so removal is allowed
+        List<String> titles = new ArrayList<>(List.of(
+                "Java 21", "Deprecated Guide", "Clean Code", "Deprecated Notes"));
 
-        // TODO: obtain an Iterator<String> from titles
-        Iterator<String> iterator = _____;
+        // DONE: obtain an Iterator<String> from titles
+        Iterator<String> iterator = titles.iterator();
 
-        // TODO: loop while iterator.hasNext()
-        while (_____) {
+        // DONE: loop while iterator.hasNext()
+        while (iterator.hasNext()) {
             String title = iterator.next();
 
             if (title.startsWith("Deprecated")) {
-                // TODO: remove through the iterator (not titles.remove)
-                _____;
+                // DONE: remove through the iterator (not titles.remove)
+                iterator.remove();
             }
         }
 

@@ -70,3 +70,36 @@ HashMap order: [Annihilation, Dune, The Hobbit]
 TreeMap order: [Annihilation, Dune, The Hobbit]
 First title: Annihilation
 Last title: The Hobbit
+
+## Exercise 5 - Safe Removal During Iteration
+
+An Iterator is a cursor over the list, not a copy of it. `iterator.remove()` deletes
+the element the latest `next()` returned and fixes the cursor's own position in the
+same step, so the walk stays valid. Calling `titles.remove(title)` inside the loop
+changes the list behind the cursor's back.
+
+ArrayList keeps a modCount that ticks on every structural change. The iterator records
+that number when created and rechecks it on every `next()`. A mismatch throws
+ConcurrentModificationException - fail-fast, so a bug crashes instead of corrupting
+quietly. Without the check, removal shifts later elements left and the loop skips one.
+
+Deterministic:
+- both Deprecated titles are removed;
+- `Remaining: [Java 21, Clean Code]`.
+
+Fail-fast is a tripwire, not a guarantee. Removing the second-to-last element leaves
+the cursor position equal to the new size, so `hasNext()` returns false, the loop exits
+early and no exception is ever thrown. That is why the list-side remove is called
+unsafe rather than just "throws" - sometimes it is silently wrong instead.
+
+Order is strict: `hasNext()` then `next()` then at most one `remove()` per `next()`.
+Removing before any `next()` throws IllegalStateException.
+
+`titles.removeIf(title -> title.startsWith("Deprecated"))` does the same job in one
+line and is the right choice when filtering by a condition. Lab 5 uses the Iterator
+because the safe-removal contract has to be understood, not just avoided.
+
+Predict the output: `list.remove` inside a for-each throws ConcurrentModificationException.
+
+Output:
+Remaining: [Java 21, Clean Code]
