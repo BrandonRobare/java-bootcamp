@@ -1,3 +1,7 @@
+// Iterator -- traversal via the Iterator interface.
+// Good for: removing while iterating -- it.remove() is the only safe way, works on
+//           List, Set and a Map's entrySet.
+// Bad at:   verbose, forward only, one pass per Iterator.
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;

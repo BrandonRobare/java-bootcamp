@@ -1,3 +1,6 @@
+// Enhanced for / for-each -- simplified read-only traversal. The default.
+// Good for: reading any Iterable or array front to back. Shortest, no off-by-one.
+// Bad at:   no index, no reverse; loop var is a copy; modifying throws CME.
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.LinkedHashMap;

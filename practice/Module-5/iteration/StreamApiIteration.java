@@ -1,3 +1,7 @@
+// Stream API -- declarative, functional style.
+// Good for: filter / map / reduce pipelines, grouping, joining.
+// Bad at:   read-only source (collect() instead), one-shot, no index, slower for
+//           trivial loops.
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

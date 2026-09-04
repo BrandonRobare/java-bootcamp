@@ -1,3 +1,6 @@
+// ListIterator -- bi-directional, Lists only.
+// Good for: walking backwards, and set() / add() editing mid-traversal.
+// Bad at:   no Set or Map, most verbose, add() is skipped by the current pass.
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;

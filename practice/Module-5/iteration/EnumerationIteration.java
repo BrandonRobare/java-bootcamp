@@ -1,3 +1,6 @@
+// Enumeration -- legacy (Java 1.0), for Vector and Hashtable.
+// Good for: nothing new. Only old APIs that still hand one back.
+// Bad at:   no remove(); Vector/Hashtable synchronize every call. Use Iterator.
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;

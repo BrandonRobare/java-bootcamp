@@ -1,3 +1,6 @@
+// For loop -- index-based.
+// Good for: arrays and Lists when you need the index -- set(i, ..), reverse, stride.
+// Bad at:   Sets and Maps (no index), LinkedList (O(n^2)), forward removal (skips).
 import java.util.ArrayList;
 import java.util.List;
 
