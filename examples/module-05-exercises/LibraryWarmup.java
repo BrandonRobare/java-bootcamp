@@ -4,33 +4,33 @@ import java.util.List;
 import java.util.Map;
 
 public class LibraryWarmup {
-    // TODO: declare availableTitles as ArrayList<String>
+    // DONE: declare availableTitles as ArrayList<String>
     private final List<String> availableTitles =
-            _____;
+            new ArrayList<>();
 
-    // TODO: declare borrowedByMember as HashMap<String, String>
+    // DONE: declare borrowedByMember as HashMap<String, String>
     private final Map<String, String> borrowedByMember =
-            _____;
+            new HashMap<>();
 
     public LibraryWarmup() {
-        // TODO: add "Effective Java" and "Clean Code" to availableTitles
-        _____
-        _____
+    // DONE: add "Effective Java" and "Clean Code" to availableTitles
+        availableTitles.add("Effective Java");
+        availableTitles.add("Clean Code");
     }
 
     boolean checkout(String memberId, String title) {
-        // TODO: return false if member already has an active loan
-        if (_____) {
+        // DONE: return false if member already has an active loan
+        if (borrowedByMember.containsKey(memberId)) {
             return false;
         }
 
-        // TODO: return false when title is unavailable (remove returns false)
-        if (_____) {
+        // DONE: return false when title is unavailable (remove returns false)
+        if (!availableTitles.remove(title)) {
             return false;
         }
 
-        // TODO: record the loan in borrowedByMember
-        _____;
+        // DONE: record the loan in borrowedByMember
+        borrowedByMember.put(memberId, title);
         return true;
     }
 
@@ -53,6 +53,10 @@ public class LibraryWarmup {
                 "Duplicate checkout: "
                 + library.checkout(
                         "M101", "Clean Code"));
+
+        System.out.println(
+                "Missing title: "
+                + library.checkout("M102", "Unknown Book"));
 
         library.printStatus();
     }

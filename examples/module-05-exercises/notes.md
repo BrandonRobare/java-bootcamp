@@ -103,3 +103,42 @@ Predict the output: `list.remove` inside a for-each throws ConcurrentModificatio
 
 Output:
 Remaining: [Java 21, Clean Code]
+
+## Exercise 7 - Library Collections Warm-up
+
+One structure is rarely enough. The catalog is a List and the loans are a Map, and a
+title must be in exactly one of them at a time. That is the invariant: after a
+successful checkout the title is out of availableTitles AND in borrowedByMember under
+that member - never in both, never in neither.
+
+The map is updated only after the title was successfully removed from the available
+list. Updating the map first could record a loan for an unavailable title and leave
+inconsistent state. Both guard clauses return before anything mutates, so a rejected
+checkout changes nothing.
+
+`List.remove(Object)` returns boolean - true if the element was found and removed. So
+`if (!availableTitles.remove(title))` both attempts the removal and reports whether the
+title was available. Without the `!` the method removes the book and then returns false,
+which mutates state and reports failure at the same time.
+
+Deterministic:
+- first checkout is true; the same member's second checkout is false;
+- an unavailable title returns false and leaves both collections unchanged.
+
+Argument order in `put(memberId, title)` is not compiler-checked here because the map is
+Map<String, String>. Swapping them compiles and prints {Effective Java=M101}. Note this
+is the opposite direction from the exercise 6 book -> borrower row; the lookup need
+decides which side is the key.
+
+The two original main calls never reach the availability guard - one succeeds and the
+other stops at containsKey. The M102 / "Unknown Book" case is the only path that
+exercises it. Passing output only proves the paths that ran are right.
+
+Predict the output: checkout for a member who already has a loan returns false.
+
+Output:
+Checkout success: true
+Duplicate checkout: false
+Missing title: false
+Available: [Clean Code]
+Borrowed: {M101=Effective Java}
