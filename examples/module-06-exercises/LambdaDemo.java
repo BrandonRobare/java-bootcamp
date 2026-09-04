@@ -6,12 +6,12 @@ public class LambdaDemo {
         SalaryCheck anonymous = new SalaryCheck() {
             @Override
             public boolean test(Employee employee) {
-                return _____;
+                return employee.salary() > 60_000;
             }
         };
 
         // TODO: lambda with the same SalaryCheck contract and same result
-        SalaryCheck lambda = _____;
+        SalaryCheck lambda = employee -> {return employee.salary() > 60_000; };
 
         System.out.println("Employee: " + alice.name());
         System.out.println("Anonymous result: " + anonymous.test(alice));

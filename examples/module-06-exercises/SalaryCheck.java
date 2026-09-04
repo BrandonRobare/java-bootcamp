@@ -1,5 +1,5 @@
 @FunctionalInterface
 public interface SalaryCheck {
-    // TODO: declare one abstract method that takes an Employee and returns boolean
-    _____
+    // DONE: declare one abstract method that takes an Employee and returns boolean
+       boolean test (Employee employee);
 }
