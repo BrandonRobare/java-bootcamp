@@ -4,11 +4,12 @@ public class RaiseDemo {
     public static void main(String[] args) {
         List<Employee> employees = EmployeeData.sample();
 
-        // TODO: map each salary * 1.10 without mutating source employees
+        // Done: map each salary * 1.10 without mutating source employees
         List<Double> raised = employees.stream()
-                // TODO: .map(...)
-                // TODO: .toList()
-                ;
+                // DONE: .map(...)
+                .map(employee -> employee.salary() * 1.10)
+                // DONE: .toList()
+                .toList();
 
         System.out.println("Raised salaries:");
         raised.forEach(s -> System.out.printf("%.0f%n", s));
