@@ -1,10 +1,8 @@
 package com.academy.analytics;
 
-import java.util.ArrayList;
-import java.util.DoubleSummaryStatistics;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import javax.swing.text.html.Option;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class EmployeeService {
 
@@ -23,19 +21,18 @@ public class EmployeeService {
     public void displayAllEmployees() {
         System.out.println("Total Employees : " + employees.size());
         System.out.println("Employee List");
-        // TODO (menu 1): stream forEach print each employee
-        throw new UnsupportedOperationException("TODO");
+        // DONE (menu 1): stream forEach print each employee
+        employees.stream().forEach(System.out::println); // .forEach(e -> System.out.println(e)) keep lambda when it does something other than delegate
     }
 
     public void displayActiveEmployees() {
         System.out.println("Active Employees:");
-        // TODO (menu 7): filter Employee::isActive; forEach
-        throw new UnsupportedOperationException("TODO");
+        // DONE (menu 7): filter Employee::isActive; forEach
+        employees.stream().filter(Employee::isActive).forEach(System.out::println);
     }
 
     public void displayGroupedEmployees() {
         // TODO (menu 2): groupingBy department; print each group
-        throw new UnsupportedOperationException("TODO");
     }
 
     public void displayReductions() {
@@ -59,13 +56,17 @@ public class EmployeeService {
     }
 
     public Optional<Employee> findTopPerformer() {
-        // TODO (menu 8 dashboard): max by rating then salary
-        throw new UnsupportedOperationException("TODO");
+        // DONE (menu 8 dashboard): max by rating then salary
+        return employees.stream()
+                .max(Comparator.comparingInt(Employee::getRating).thenComparingDouble(Employee::getSalary));
     }
 
     public List<Employee> getTopSalaries(int count) {
-        // TODO (menu 8 dashboard): sorted salary desc; limit count; toList
-        throw new UnsupportedOperationException("TODO");
+        // DONE (menu 8 dashboard): sorted salary desc; limit count; toList
+        return employees.stream()
+                .sorted(Comparator.comparing(Employee::getSalary).reversed())
+                .limit(count)
+                .toList();
     }
 
     public List<Employee> getTopPerformers(int minimumRating) {
@@ -79,8 +80,13 @@ public class EmployeeService {
     }
 
     public Optional<String> findDepartmentWithHighestAverageSalary() {
-        // TODO (menu 8 dashboard): groupingBy averagingDouble; max entry; map key
-        throw new UnsupportedOperationException("TODO");
+        // DONE (menu 8 dashboard): groupingBy averagingDouble; max entry; map key
+         return employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.averagingDouble(Employee::getSalary)))
+                 .entrySet()
+                 .stream()
+                 .max(Map.Entry.comparingByValue())
+                 .map(Map.Entry::getKey);
     }
 
     // --- BONUS / DEMO (menus 10–21) — stub so explorers do not crash ---
