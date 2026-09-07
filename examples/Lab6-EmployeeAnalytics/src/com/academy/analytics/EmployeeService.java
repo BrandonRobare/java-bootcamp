@@ -1,6 +1,5 @@
 package com.academy.analytics;
 
-import javax.swing.text.html.Option;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -32,27 +31,71 @@ public class EmployeeService {
     }
 
     public void displayGroupedEmployees() {
-        // TODO (menu 2): groupingBy department; print each group
+        // DONE (menu 2): groupingBy department into TreeMap; print each group
+        Map<String, List<Employee>> byDept = employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment, TreeMap::new, Collectors.toList()));
+
+        byDept.forEach((dept, list) -> {
+            System.out.println(dept + " (" + list.size() + ")");
+            list.forEach(e -> System.out.println("   " + e.getName()));
+        });
     }
 
     public void displayReductions() {
-        // TODO (menu 3): highest/lowest via reduce; total/average via mapToDouble
-        throw new UnsupportedOperationException("TODO");
+        // DONE (menu 3): highest/lowest via reduce; total/average via mapToDouble
+        Optional<Double> highest = employees.stream()
+                .map(Employee::getSalary)
+                .reduce(Double::max);
+
+        Optional<Double> lowest = employees.stream()
+                .map(Employee::getSalary)
+                .reduce(Double::min);
+
+        double total = employees.stream()
+                .mapToDouble(Employee::getSalary)
+                .sum();
+
+        double average = employees.stream()
+                .mapToDouble(Employee::getSalary)
+                .average().orElse(0);
+
+        System.out.println("Highest Salary : " + highest.orElse(0.0));
+        System.out.println("Lowest Salary : " + lowest.orElse(0.0));
+        System.out.printf("Total Salary : %.0f%n", total);
+        System.out.printf("Average Salary : %.0f%n", average);
     }
 
     public void displaySummaryStatistics() {
-        // TODO (menu 3): summarizingDouble salary; print max/min/avg/sum/count
-        throw new UnsupportedOperationException("TODO");
+        // DONE (menu 3): summarizingDouble salary; print max/min/avg/sum/count
+        DoubleSummaryStatistics stats = employees.stream()
+                .collect(Collectors.summarizingDouble(Employee::getSalary));
+
+        System.out.println("max: " + stats.getMax());
+        System.out.println("min: " + stats.getMin());
+        System.out.println("avg: " + stats.getAverage());
+        System.out.println("sum: " + stats.getSum());
+        System.out.println("count: " + stats.getCount());
     }
 
     public void displayPartitionedEmployees() {
-        // TODO (menu 3): partitioningBy salary > 100_000
-        throw new UnsupportedOperationException("TODO");
+        // DONE (menu 3): partitioningBy salary > 100_000
+        Map<Boolean, List<Employee>> partitionedEmployees = employees.stream()
+                .collect(Collectors.partitioningBy(e -> e.getSalary() > 100_000));
+
+        System.out.println("High Earners (> 100000):");
+        partitionedEmployees.get(true).forEach(System.out::println);
+
+        System.out.println("Others:");
+        partitionedEmployees.get(false).forEach(System.out::println);
     }
 
     public void displayHighestPaidEmployeeOptional() {
-        // TODO (menu 5): max by salary; ifPresentOrElse
-        throw new UnsupportedOperationException("TODO");
+        // DONE (menu 5): max by salary; ifPresentOrElse
+        Optional<Employee> highestPaid = employees.stream()
+                .max(Comparator.comparingDouble(Employee::getSalary));
+
+                highestPaid.ifPresentOrElse(e -> System.out.println("Highest Paid Employee: " + e),
+                                                    () -> System.out.println("No Employee Found"));
     }
 
     public Optional<Employee> findTopPerformer() {
@@ -70,13 +113,18 @@ public class EmployeeService {
     }
 
     public List<Employee> getTopPerformers(int minimumRating) {
-        // TODO (menu 4): filter rating >= minimum; sort; toList
-        throw new UnsupportedOperationException("TODO");
+        // DONE (menu 4): filter rating >= minimum; sort; toList
+        return employees.stream()
+                .filter(e -> e.getRating() >= minimumRating)
+                .sorted(Comparator.comparingInt(Employee::getRating).reversed())
+                .toList();
     }
 
     public Map<String, DoubleSummaryStatistics> getDepartmentStatistics() {
-        // TODO (menu 6): groupingBy department + summarizingDouble salary
-        throw new UnsupportedOperationException("TODO");
+        return employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment,
+                        TreeMap::new,
+                        Collectors.summarizingDouble(Employee::getSalary)));
     }
 
     public Optional<String> findDepartmentWithHighestAverageSalary() {

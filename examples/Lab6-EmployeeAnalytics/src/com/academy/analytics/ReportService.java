@@ -3,6 +3,7 @@ package com.academy.analytics;
 import java.util.List;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -80,8 +81,9 @@ public class ReportService {
 
     public void displayTopPerformers() {
         System.out.println("Top Performers (Rating >= 4):");
-        // TODO (menu 4): employeeService.getTopPerformers(4).forEach(...)
-        throw new UnsupportedOperationException("TODO");
+        // DONE (menu 4): employeeService.getTopPerformers(4).forEach(...)
+        employeeService.getTopPerformers(4)
+                .forEach(System.out::println);
     }
 
     public void displayHighestSalary() {
@@ -89,8 +91,14 @@ public class ReportService {
     }
 
     public void displayDepartmentStatistics() {
-        // TODO (menu 6): getDepartmentStatistics(); print count/avg/max/min per dept
-        throw new UnsupportedOperationException("TODO");
+        Map<String, DoubleSummaryStatistics> stats = employeeService.getDepartmentStatistics();
+        stats.forEach((department, departmentStats) -> {
+            System.out.println(department);
+            System.out.printf("  Count   : %d%n", departmentStats.getCount());
+            System.out.printf("  Average : %.0f%n", departmentStats.getAverage());
+            System.out.printf("  Max     : %.0f%n", departmentStats.getMax());
+            System.out.printf("  Min     : %.0f%n", departmentStats.getMin());
+        });
     }
 
     public void displayActiveEmployees() {
