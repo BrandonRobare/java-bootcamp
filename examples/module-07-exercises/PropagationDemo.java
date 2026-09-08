@@ -1,18 +1,17 @@
 public class PropagationDemo {
-    static void accountLayer()
-            _____ { // TODO: throws InsufficientFundsException
+    // DONE: throws InsufficientFundsException
+    static void accountLayer() throws InsufficientFundsException {
         // Deepest layer creates the domain failure.
-        // TODO: throw new InsufficientFundsException(100.00, 150.00)
+        // DONE: throw new InsufficientFundsException(100.00, 150.00)
+        throw new InsufficientFundsException(100.00, 150.00);
     }
 
-    static void serviceLayer()
-            _____ { // TODO: throws InsufficientFundsException
+    static void serviceLayer() throws InsufficientFundsException { // DONE: throws InsufficientFundsException
         // No recovery here, so declare and let it propagate.
         accountLayer();
     }
 
-    static void menuLayer()
-            _____ { // TODO: throws InsufficientFundsException
+    static void menuLayer() throws InsufficientFundsException{ // DONE: throws InsufficientFundsException
         // Still no recovery action; keep the contract.
         serviceLayer();
     }
@@ -20,9 +19,11 @@ public class PropagationDemo {
     public static void main(String[] args) {
         try {
             menuLayer();
-        } catch (_____ ex) { // TODO: catch InsufficientFundsException
-            // TODO: print "Caught at main: " + ex.getMessage()
-            // TODO: ex.printStackTrace(System.out)
+        } catch (InsufficientFundsException ex) { // DONE: catch InsufficientFundsException
+            // DONE: print "Caught at main: " + ex.getMessage()
+            System.out.println("Caught at main: " + ex.getMessage());
+            // DONE: ex.printStackTrace(System.out)
+            ex.printStackTrace(System.out);
         }
     }
 }
