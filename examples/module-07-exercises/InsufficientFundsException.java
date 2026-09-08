@@ -1,9 +1,9 @@
-public class InsufficientFundsException extends _____ { // TODO: Exception
+public class InsufficientFundsException extends Exception { // DONE: Exception
     private final double balance;
     private final double requested;
 
     public InsufficientFundsException(double balance, double requested) {
-        super(_____); // TODO: formatted message
+        super(String.format("Insufficient funds: balance=%.2f, requested=%.2f", balance, requested)); // DONE: formatted message
         this.balance = balance;
         this.requested = requested;
     }
