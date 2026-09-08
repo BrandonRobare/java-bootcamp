@@ -13,6 +13,8 @@
 
 ## Rules
 
+<!-- DONE: lowercase packages; match folders; no default package -->
+
 - **Package segments are lowercase.** `com.Northstar.CRM` compiles on macOS and Windows because their filesystems are case-insensitive, then fails on a Linux CI box where `Northstar/` and `northstar/` are different directories.
 - **Declaration matches the folder path exactly**, `.` swapped for `/`. `package com.northstar.crm.service;` must sit in `src/main/java/com/northstar/crm/service/`.
 - **No default package.** Classes in the unnamed package cannot be imported from any named package, so nothing else in the project can use them.

@@ -8,11 +8,14 @@ public class StructureDemo {
     public static void main(String[] args) {
         CustomerRequest request = new CustomerRequest("Amina Khan", "amina@example.test");
 
-        // TODO: build Customer entity from request (assign an id + ACTIVE status)
-        Customer entity = _____;
+        // DONE: build Customer entity from request (assign an id + ACTIVE status)
+        Customer entity = new Customer("CUS-1001", request.getName(), "ACTIVE");
 
-        // TODO: map entity → CustomerResponse
-        CustomerResponse response = _____;
+        // DONE: map entity → CustomerResponse
+        CustomerResponse response = new CustomerResponse(
+                entity.getId(),
+                entity.getName(),
+                entity.getStatus());
 
         System.out.println(response.summary());
     }

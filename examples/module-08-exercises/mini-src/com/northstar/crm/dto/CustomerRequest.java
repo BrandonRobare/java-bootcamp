@@ -1,15 +1,15 @@
 package com.northstar.crm.dto;
 
 public class CustomerRequest {
-    // TODO: name + email fields and constructor/getters (no id/status required on request)
-    private final String _____;
-    private final String _____;
+    // DONE: name + email fields and constructor/getters (no id/status required on request)
+    private final String name;
+    private final String email;
 
     public CustomerRequest(String name, String email) {
-        this._____ = name;
-        this._____ = email;
+        this.name = name;
+        this.email = email;
     }
 
-    public String getName() { return _____; }
-    public String getEmail() { return _____; }
+    public String getName() { return name; }
+    public String getEmail() { return email; }
 }

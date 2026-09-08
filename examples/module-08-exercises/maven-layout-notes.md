@@ -11,9 +11,13 @@
 
 ## Why `target/` is not committed
 
+<!-- DONE: one or two sentences -->
+
 `target/` is generated from source by Maven. It can be deleted and rebuilt with `mvn clean package`, so it belongs in `.gitignore` rather than in history — committing it adds binary churn and merge conflicts that carry no information.
 
 ## Mistakes to avoid
+
+<!-- DONE: production code in test tree; secrets in properties; hand-editing target; -->
 
 - **Production code in `src/test/java`** — the test tree is not packaged into the JAR, so the class exists at test time and vanishes at runtime.
 - **Secrets in `application.properties`** — anything committed there is in git history forever, readable by everyone with repo access. Use environment variables or a secrets manager.
