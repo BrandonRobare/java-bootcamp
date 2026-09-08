@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -35,22 +36,67 @@ public class ATMService {
     }
 
     public void login() {
-        // TODO: if already logged in, print message and return
-        // TODO: read account number; findAccount; read PIN
-        // TODO: on bad PIN decrement attempts + throw InvalidPinException
-        // TODO: on success set loggedInAccount, reset attempts, log + "Login Successful"
-        // TODO: catch AccountNotFoundException | InvalidPinException; finally printReturnMessage
-        throw new UnsupportedOperationException("TODO");
+        if (loggedInAccount != null) {
+            System.out.println("Already logged in as " + loggedInAccount.getCustomerName());
+            return;
+        }
+
+        System.out.print("Enter Account Number : ");
+        String accountNumber = scanner.nextLine().trim();
+
+        try {
+            Account account = findAccount(accountNumber);
+            System.out.print("Enter PIN : ");
+            String pin = scanner.nextLine().trim();
+
+            if (!account.getPin().equals(pin)) {
+                pinAttemptsRemaining--;
+                throw new InvalidPinException("Invalid PIN entered.", pinAttemptsRemaining);
+            }
+
+            loggedInAccount = account;
+            pinAttemptsRemaining = MAX_PIN_ATTEMPTS;
+            System.out.println("Login Successful");
+            LoggerUtil.logInfo("Login successful for account " + accountNumber);
+        } catch (AccountNotFoundException e) {
+            System.out.println("ERROR");
+            System.out.println(e.getMessage());
+            LoggerUtil.logError(e.getMessage(), e);
+        } catch (InvalidPinException ex) {
+            System.out.println("ERROR");
+            System.out.println(ex.getMessage());
+            System.out.println("Attempts remaining : " + ex.getAttemptsRemaining());
+            LoggerUtil.logError(ex.getMessage(), ex);
+            if (ex.getAttemptsRemaining() <= 0) {
+                System.out.println("Maximum PIN attempts reached. Login locked for this session.");
+            }
+        } finally {
+            printReturnMessage();
+        }
     }
 
     public void deposit() {
-        // TODO: executeTransaction("Deposit", ...) — requireLogin, readAmount, deposit, record, print
-        throw new UnsupportedOperationException("TODO");
+        executeTransaction("Deposit", () -> {
+            requireLogin();
+            double amount = readAmount("Enter amount to deposit: ");
+            loggedInAccount.deposit(amount);
+            recordTransaction("Deposit", amount, true, "Deposit successful");
+
+            System.out.println("Deposit Successful");
+            System.out.printf("Current Balance : %.0f%n", loggedInAccount.getBalance());
+        });
     }
 
     public void withdraw() {
-        // TODO: executeTransaction("Withdraw", ...) — requireLogin, readAmount, withdraw, record, print
-        throw new UnsupportedOperationException("TODO");
+        executeTransaction("Withdraw", () -> {
+            requireLogin();
+            double amount = readAmount("Enter amount to withdraw: ");
+            loggedInAccount.withdraw(amount);
+            recordTransaction("Withdraw", amount, true, "Withdraw successful");
+
+            System.out.println("Withdraw Successful");
+            System.out.printf("Current Balance : %.0f%n", loggedInAccount.getBalance());
+        });
     }
 
     public void displayBalance() {
@@ -125,7 +171,6 @@ public class ATMService {
             LoggerUtil.logTransaction(operationName + " completed successfully",
                     (System.nanoTime() - startTime) / 1_000_000);
         } catch (InputMismatchException ex) {
-            scanner.nextLine();
             System.out.println("ERROR");
             System.out.println("Invalid numeric input.");
             System.out.println("Please enter a valid amount.");
