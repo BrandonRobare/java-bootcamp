@@ -1,17 +1,38 @@
-public class StrategyDemo {
-    static int attempts;
+import java.sql.SQLOutput;
+import java.util.Random;
 
-    static String flakyCall() {
-        attempts++;
-        if (attempts < 3) {
-            throw new IllegalStateException("transient failure #" + attempts);
+public class StrategyDemo {
+    static final Random random = new Random();
+
+    // Simulates a transient failure, like a flaky network call.
+    static int fetchBalance() {
+        if (random.nextInt(3) == 0) {
+            throw new IllegalStateException(
+                    "Service temporarily unavailable");
         }
-        return "OK";
+        return 500;
+    }
+
+    // Strategy 1: Retry — try again a bounded number of times.
+    static int fetchWithRetry(int maxAttempts) {
+        for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+            try {
+                return fetchBalance();
+            } catch (IllegalStateException ex) { // DONE: catch IllegalStateException
+                // DONE: print "Attempt " + attempt + " failed: " + ex.getMessage()
+                System.out.println("Attempt " + attempt + " failed: " + ex.getMessage());
+                // DONE: if attempt == maxAttempts, print "Retries exhausted, falling back to default."
+                if (attempt == maxAttempts) {
+                    System.out.println("Retries exhausted, falling back to default.");
+                }
+            }
+        }
+        // Strategy 2: Fallback / Default — safe value after retries fail.
+        return 0; // DONE: return 0
     }
 
     public static void main(String[] args) {
-        attempts = 0;
-        String result = _____; // TODO: retry then fallback
-        System.out.println("Result: " + result);
+        int balance = fetchWithRetry(3);
+        System.out.println("Balance shown to user: " + balance);
     }
 }
