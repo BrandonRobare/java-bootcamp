@@ -12,8 +12,8 @@ public class TryWithResourcesDemo {
             Files.writeString(
                     file, "deposit 100\nwithdraw 25\n");
 
-            // TODO: try-with-resources — BufferedReader from Files.newBufferedReader(file)
-            try (_____ reader = _____) {
+            // DONE: try-with-resources — BufferedReader from Files.newBufferedReader(file)
+            try (BufferedReader reader = Files.newBufferedReader(file)) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     System.out.println("Read: " + line);
@@ -22,8 +22,9 @@ public class TryWithResourcesDemo {
 
             System.out.println(
                     "Reader closed automatically.");
-        } catch (_____ ex) { // TODO: catch IOException
-            // TODO: print "File error: " + ex.getMessage()
+        } catch (IOException ex) { // DONE: catch IOException
+            // DONE: print "File error: " + ex.getMessage()
+            System.out.println("File error: " + ex.getMessage());
         }
     }
 }
