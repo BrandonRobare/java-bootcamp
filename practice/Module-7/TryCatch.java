@@ -8,6 +8,4 @@ public class TryCatch {
             System.out.println("Execution completed");
         }
     }
-
-
 }
