@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,10 +15,12 @@ public class LoggingWarmup {
             throw new IllegalStateException(
                     "Withdrawal service unavailable");
         } catch (IllegalStateException ex) {
-            // TODO: LOGGER.log(Level.SEVERE, "Withdrawal failed accountId=" + accountId, ex)
+            // DONE: LOGGER.log(Level.SEVERE, "Withdrawal failed accountId=" + accountId, ex)
+            LOGGER.log(Level.SEVERE, "Withdrawal failed accountId=" + accountId, ex);
             //   pass ex as the third argument to keep the stack trace
 
-            // TODO: print user-safe message:
+            // DONE: print user-safe message:
+            System.out.println("User message: Withdrawal could not be completed.");
             //   "User message: Withdrawal could not be completed."
         }
     }
