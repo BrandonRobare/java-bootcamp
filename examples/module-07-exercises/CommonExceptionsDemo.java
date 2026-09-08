@@ -4,21 +4,21 @@ public class CommonExceptionsDemo {
             int divisor = 0;
             int result = 10 / divisor;
             System.out.println(result);
-        } catch (_____ ex) { // TODO: ArithmeticException
+        } catch (ArithmeticException ex) { // DONE: ArithmeticException
             System.out.println("Caught: " + ex.getClass().getSimpleName());
         }
 
         try {
             String value = null;
             System.out.println(value.length());
-        } catch (_____ ex) { // TODO: NullPointerException
+        } catch (NullPointerException ex) { // DONE: NullPointerException
             System.out.println("Caught: " + ex.getClass().getSimpleName());
         }
 
         try {
             int[] values = {10, 20};
             System.out.println(values[5]);
-        } catch (_____ ex) { // TODO: ArrayIndexOutOfBoundsException
+        } catch (ArrayIndexOutOfBoundsException ex) { // DONE: ArrayIndexOutOfBoundsException
             System.out.println("Caught: " + ex.getClass().getSimpleName());
         }
 
