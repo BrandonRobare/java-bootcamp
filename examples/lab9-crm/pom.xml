@@ -7,7 +7,7 @@
   <groupId>com.northstar</groupId>
   <artifactId>customer-service</artifactId>
   <version>0.1.0-SNAPSHOT</version>
-  <!-- TODO: confirm packaging is jar -->
+  <!-- DONE: confirm packaging is jar -->
   <packaging>jar</packaging>
 
   <name>Northstar Customer Service</name>
@@ -16,20 +16,20 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>21</maven.compiler.release>
-    <!-- TODO: confirm junit.version / spring.version -->
+    <!-- DONE: junit 5.11.4, spring 6.2.3 — versions centralized as properties -->
     <junit.version>5.11.4</junit.version>
     <spring.version>6.2.3</spring.version>
   </properties>
 
   <dependencies>
-    <!-- TODO: learning placeholder — Spring Core API (no Boot app code in Week 2) -->
+    <!-- DONE: learning placeholder — Spring Core API (no Boot app code in Week 2) -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <version>${spring.version}</version>
     </dependency>
 
-    <!-- TODO: confirm scope=test so JUnit does not ship as runtime app dep -->
+    <!-- DONE: scope=test — JUnit stays off the runtime classpath -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
@@ -39,7 +39,7 @@
   </dependencies>
 
   <build>
-    <!-- TODO: confirm finalName customer-service for java -jar target/customer-service.jar -->
+    <!-- DONE: finalName customer-service -->
     <finalName>customer-service</finalName>
     <plugins>
       <plugin>
@@ -47,7 +47,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>
         <configuration>
-          <!-- TODO: confirm release 21 -->
+          <!-- DONE: release 21 -->
           <release>21</release>
         </configuration>
       </plugin>
@@ -63,7 +63,7 @@
         <configuration>
           <archive>
             <manifest>
-              <!-- TODO: confirm Main-Class -->
+              <!-- DONE: Main-Class com.northstar.crm.Main -->
               <mainClass>com.northstar.crm.Main</mainClass>
             </manifest>
           </archive>
@@ -71,6 +71,28 @@
       </plugin>
     </plugins>
   </build>
-
-  <!-- TODO: add profiles id=dev (activeByDefault), id=test, and id=prod with distinct app.env properties -->
+  <!-- DONE: add profiles id=dev (activeByDefault), id=test, and id=prod with distinct app.env properties -->
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <app.environment>dev</app.environment>
+      </properties>
+    </profile>
+    <profile>
+      <id>test</id>
+      <properties>
+        <app.environment>test</app.environment>
+      </properties>
+    </profile>
+    <profile>
+      <id>prod</id>
+      <properties>
+        <app.environment>prod</app.environment>
+      </properties>
+    </profile>
+  </profiles>
 </project>
