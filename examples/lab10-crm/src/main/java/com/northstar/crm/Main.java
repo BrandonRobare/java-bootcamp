@@ -7,10 +7,21 @@ import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) {
-        // TODO: print "Northstar customer service booting"
+        System.out.println("Northstar customer service booting");
         CustomerService svc = new CustomerService();
-        // TODO: add CUS-1001 Amina Khan ACTIVE and CUS-1002 Ravi Singh PROSPECT
-        // TODO: change one status and print both customers
-        throw new UnsupportedOperationException("TODO: demo CUS-1001 / CUS-1002");
+
+        Customer c1 = new Customer("CUS-1001", "Amina Khan", "amina.khan@example.com",
+                "555-0101", CustomerStatus.ACTIVE, LocalDateTime.now());
+        Customer c2 = new Customer("CUS-1002", "Ravi Singh", "ravi.singh@example.com",
+                "555-0102", CustomerStatus.PROSPECT, LocalDateTime.now());
+
+        svc.addCustomer(c1);
+        svc.addCustomer(c2);
+
+        System.out.println("Amina: " + svc.findByCustomerId("CUS-1001"));
+        System.out.println("Ravi before: " + svc.findByCustomerId("CUS-1002"));
+
+        svc.updateStatus("CUS-1002", CustomerStatus.ACTIVE);
+        System.out.println("After activation: " + svc.findByCustomerId("CUS-1002"));
     }
 }
