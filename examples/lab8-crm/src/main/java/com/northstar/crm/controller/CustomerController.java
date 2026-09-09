@@ -17,12 +17,12 @@ public class CustomerController {
     }
 
     public CustomerResponse createCustomer(CustomerRequest request) {
-        // TODO: delegate to customerService.create(request) — no SQL / files here
-        throw new UnsupportedOperationException("TODO: delegate createCustomer");
+        // DONE: delegate to customerService.create(request) — no SQL / files here
+        return customerService.create(request);
     }
 
     public CustomerResponse getCustomer(String customerId) {
-        // TODO: delegate to customerService.getById(customerId)
-        throw new UnsupportedOperationException("TODO: delegate getCustomer");
+        // DONE: delegate to customerService.getById(customerId)
+        return customerService.getById(customerId);
     }
 }

@@ -8,9 +8,11 @@ package com.northstar.crm;
 public class Main {
 
     public static void main(String[] args) {
-        // TODO: print "Northstar CRM skeleton — Lab 8"
-        // TODO: print the seven packages: controller, service, repository, entity, dto, config, exception
-        // TODO: print sample IDs CUS-1001 / CUS-1002
-        throw new UnsupportedOperationException("TODO: implement Main banner");
+        // DONE: print "Northstar CRM skeleton — Lab 8"
+        System.out.println("Northstar CRM skeleton — Lab 8");
+        // DONE: print the seven packages: controller, service, repository, entity, dto, config, exception
+        System.out.println("controller, service, repository, entity, dto, config, exception");
+        // DONE: print sample IDs CUS-1001 / CUS-1002
+        System.out.println("Examples: CUS-1001 Amina Khan ACTIVE | CUS-1002 Ravi Singh PROSPECT");
     }
 }

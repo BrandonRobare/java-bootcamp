@@ -5,8 +5,15 @@ package com.northstar.crm.entity;
  * Future fields: customerId (e.g. CUS-1001), fullName (Amina Khan),
  * email, status (ACTIVE/PROSPECT), createdAt.
  *
- * TODO: keep this class free of Spring / JPA / Kafka imports (Lab 8 rule).
+ * DONE: keep this class free of Spring / JPA / Kafka imports (Lab 8 rule).
  */
 public class Customer {
-    // TODO: document intended fields in a short class-level comment (no implementation required yet)
+    // DONE: document intended fields in a short class-level comment (no implementation required yet)
+    /*
+    String customerId;
+    String fullName;
+    String email;
+    CustomerStatus status;  // enum CustomerStatus { ACTIVE, PROSPECT }
+    Instant createdAt;
+     */
 }

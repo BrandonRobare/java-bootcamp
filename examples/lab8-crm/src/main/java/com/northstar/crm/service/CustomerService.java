@@ -9,7 +9,7 @@ import com.northstar.crm.repository.CustomerRepository;
  */
 public class CustomerService {
 
-    // TODO: keep a final CustomerRepository field + constructor injection (even if unused in Lab 8)
+    // DONE: keep a final CustomerRepository field + constructor injection (even if unused in Lab 8)
     private final CustomerRepository repository;
 
     public CustomerService(CustomerRepository repository) {
@@ -17,12 +17,12 @@ public class CustomerService {
     }
 
     public CustomerResponse create(CustomerRequest request) {
-        // TODO: throw UnsupportedOperationException("Lab 8 stub — implement later")
-        throw new UnsupportedOperationException("TODO: Lab 8 stub create");
+        // DONE: throw UnsupportedOperationException("Lab 8 stub — implement later")
+        throw new UnsupportedOperationException("Lab 8 stub — implement later");
     }
 
     public CustomerResponse getById(String customerId) {
-        // TODO: throw UnsupportedOperationException("Lab 8 stub — implement later")
-        throw new UnsupportedOperationException("TODO: Lab 8 stub getById");
+        // DONE: throw UnsupportedOperationException("Lab 8 stub — implement later")
+        throw new UnsupportedOperationException("Lab 8 stub — implement later");
     }
 }
