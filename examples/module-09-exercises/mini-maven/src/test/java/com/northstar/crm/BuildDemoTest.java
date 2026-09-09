@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class BuildDemoTest {
     @Test
     void greeting_matches_banner() {
-        // TODO: assertEquals expected greeting
-        assertEquals(_____, BuildDemo.greeting());
+        assertEquals("BuildDemo ready for Lab 9", BuildDemo.greeting());
     }
 }

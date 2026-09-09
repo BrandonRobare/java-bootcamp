@@ -4,11 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <!-- TODO: fill coordinates -->
-  <groupId>_____</groupId>
-  <artifactId>_____</artifactId>
-  <version>_____</version>
+  <groupId>com.northstar</groupId>
+  <artifactId>build-demo</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
+
+  <name>Module 9 Mini Maven</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,15 +22,38 @@
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
       <version>${junit.version}</version>
-      <!-- TODO: test scope -->
-      <scope>_____</scope>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
   <build>
     <finalName>build-demo</finalName>
     <plugins>
-      <!-- TODO: compiler + surefire + jar with Main-Class com.northstar.crm.BuildDemo -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.2</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>com.northstar.crm.BuildDemo</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
