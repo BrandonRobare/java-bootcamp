@@ -1,6 +1,6 @@
-# Lab 12 — Target API Sketch
+# Lab 12: Target API Sketch
 
-## Step 1 — Methods
+## Step 1: Methods
 
 Replacing `doStuff(a,b,c,d,e)` and `get(id)` with three named methods:
 
@@ -24,20 +24,20 @@ Names I left out: `findById`, because it does the same job as `getCustomer` and 
 names for one job is worse than one. `validateStatus`, because the enum parameter
 removes the string that needed validating.
 
-## Step 2 — Ravi path
+## Step 2: Ravi path
 
 Ravi is `CUS-1002` / `PROSPECT`. `updateStatus("CUS-1002", CustomerStatus.ACTIVE)` moves
 him PROSPECT to ACTIVE. The status change belongs there, not in `createCustomer`. The
 starter does it inside create, behind the `name.contains("UPDATE")` branch.
 
-## Step 3 — Keep out
+## Step 3: Keep out
 
 Out of scope for this sketch: REST endpoints, `@RestController`, Spring wiring of any
 kind, persistence and repositories. `CustomerService` stays a plain Java class called
 from `Main`. Also out: the `CustomerRequest` and `CustomerResponse` DTOs. They are empty
 shells in the starter, and filling them is a hosting concern rather than a naming cleanup.
 
-## Step 4 — Prep boundary
+## Step 4: Prep boundary
 
 *Do not complete full Lab 12 refactor in pre-lab.* This file is the contract only. The
 method bodies get written in Lab 12.
