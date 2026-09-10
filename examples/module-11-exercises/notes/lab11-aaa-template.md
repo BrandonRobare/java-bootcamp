@@ -7,6 +7,6 @@ activate_prospectRavi_setsStatusActive
 
 | Phase | What you write |
 | ----- | -------------- |
-| Arrange | <!-- TODO: CUS-1002 PROSPECT --> |
-| Act | <!-- TODO: activate call --> |
-| Assert | <!-- TODO: ACTIVE --> |
+| Arrange | Customer CUS-1002 Ravi Singh status PROSPECT |
+| Act | Call CustomerService.activateCustomer("CUS-1002") (conceptual — trigger updateStatus/activate) |
+| Assert | Customer CUS-1002 status is ACTIVE; note correlation lab-request-001 for later logging |
