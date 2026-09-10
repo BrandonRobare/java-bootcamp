@@ -20,10 +20,19 @@ That contrast is the whole argument for scopes.
 
 ## Why `junit-jupiter` must stay `test`
 
-On the default `compile` scope, JUnit would be packaged into `customer-service.jar`,
-land on the production runtime classpath, and become a transitive dependency of anyone
-who depends on this artifact. A test framework shipped to customers is a build smell,
-and it lets production code compile against assertions that should never run there.
+On the default `compile` scope, JUnit lands on the production compile classpath, so
+production code can `import org.junit.jupiter.api...` and still build. It also becomes a
+transitive dependency inherited by anyone who depends on this artifact.
+
+It does **not** get packaged into `customer-service.jar` — a plain JAR contains only its
+own classes, never its dependencies, so scope cannot change what is inside it. Verified
+in `failure-experiments.md` #3: with the scope removed the tree read `:compile`, but
+`jar tf` still found zero `org/junit` entries and the artifact stayed ~8.5 KB. The
+"ships to customers" failure needs a fat JAR (shade, assembly, or a Boot repackage).
+
+The real proof is the compiler. The same `Main.java` referencing a JUnit type builds
+clean on `compile` scope and fails on `test` scope with `package org.junit.jupiter.api
+does not exist`. Scope is an enforced boundary, not documentation.
 
 ## Symbols
 

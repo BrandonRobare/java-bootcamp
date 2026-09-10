@@ -1,0 +1,12 @@
+2026-09-09 20:06:12 INFO Login successful for account 1001
+2026-09-09 20:06:12 ERROR Requested 20000.0 Balance 11000.0
+InsufficientFundsException Transaction Failed. Insufficient Account Balance.
+[com.academy.atm.Account.withdraw(Account.java:50), com.academy.atm.ATMService.lambda$withdraw$1(ATMService.java:94), com.academy.atm.ATMService.executeTransaction(ATMService.java:170), com.academy.atm.ATMService.withdraw(ATMService.java:91), com.academy.atm.Main.main(Main.java:34)]
+2026-09-09 20:06:12 INFO Deposit completed successfully | Execution Time: 1 ms
+2026-09-09 20:06:12 INFO Balance Inquiry completed successfully | Execution Time: 0 ms
+2026-09-09 20:06:12 INFO Mini Statement completed successfully | Execution Time: 0 ms
+2026-09-09 20:06:49 INFO Login successful for account 1001
+2026-09-09 20:06:49 ERROR Invalid numeric input during Deposit
+InputMismatchException Invalid numeric input.
+[com.academy.atm.ATMService.readAmount(ATMService.java:238), com.academy.atm.ATMService.lambda$deposit$0(ATMService.java:81), com.academy.atm.ATMService.executeTransaction(ATMService.java:170), com.academy.atm.ATMService.deposit(ATMService.java:79), com.academy.atm.Main.main(Main.java:33)]
+2026-09-09 20:06:49 INFO Balance Inquiry completed successfully | Execution Time: 0 ms
