@@ -7,19 +7,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Lab 10 baseline. Lab 11 TODOs: inject CustomerNotifier; call notifyStatusChange
- * from updateStatus; extract validateCustomerId; keep behavior for CUS-1001 / CUS-1002.
- */
 public class CustomerService {
     private final List<Customer> customers = new ArrayList<>();
-    // TODO: private final CustomerNotifier notifier; + no-arg (no-op) and injectable ctors
+    private final CustomerNotifier notifier;
+
+    public CustomerService() {
+        this((customerId, oldStatus, newStatus) -> { });
+    }
+
+    public CustomerService(CustomerNotifier notifier) {
+        this.notifier = notifier;
+    }
 
     public Customer addCustomer(Customer customer) {
-        // TODO: extract duplicated validation into a private helper (Lab 11)
-        if (customer == null || customer.getCustomerId() == null || customer.getCustomerId().isBlank()) {
-            throw new IllegalArgumentException("customerId is required");
+        if (customer == null) {
+            throw new IllegalArgumentException("customer is required");
         }
+        validateCustomerId(customer.getCustomerId());
         if (findByCustomerId(customer.getCustomerId()).isPresent()) {
             throw new IllegalStateException("Duplicate customerId: " + customer.getCustomerId());
         }
@@ -39,13 +43,29 @@ public class CustomerService {
                 .findFirst();
     }
 
+    public List<Customer> findByStatus(CustomerStatus status) {
+        return customers.stream()
+                .filter(c -> c.getStatus() == status)
+                .toList();
+    }
+
     public Customer updateStatus(String customerId, CustomerStatus newStatus) {
+        validateCustomerId(customerId);
         Customer c = findByCustomerId(customerId)
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found: " + customerId));
-        // TODO: capture oldStatus, set newStatus, then notifier.notifyStatusChange(...)
+        CustomerStatus oldStatus = c.getStatus();
         c.setStatus(newStatus);
+        notifier.notifyStatusChange(customerId, oldStatus, newStatus);
         return c;
     }
 
-    // TODO (required for Tests run: 8): findByStatus(CustomerStatus) and listAll()
+    public List<Customer> listAll() {
+        return List.copyOf(customers);
+    }
+
+    private void validateCustomerId(String customerId) {
+        if (customerId == null || customerId.isBlank()) {
+            throw new IllegalArgumentException("customerId is required");
+        }
+    }
 }

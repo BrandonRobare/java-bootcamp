@@ -19,8 +19,13 @@ class CustomerNotifierMockTest {
 
     @Test
     void updateStatusInvokesNotifierWithOldAndNewStatus() {
-        // TODO: new CustomerService(notifier); add CUS-1002 PROSPECT; updateStatus → ACTIVE;
-        // verify(notifier).notifyStatusChange("CUS-1002", PROSPECT, ACTIVE);
-        throw new UnsupportedOperationException("TODO: Mockito verify notifyStatusChange");
+        CustomerService service = new CustomerService(notifier);
+        Customer ravi = new Customer("CUS-1002", "Ravi Singh", "ravi.singh@example.com",
+                "555-0102", CustomerStatus.PROSPECT, LocalDateTime.of(2024, 2, 20, 8, 45));
+        service.addCustomer(ravi);
+
+        service.updateStatus("CUS-1002", CustomerStatus.ACTIVE);
+
+        verify(notifier).notifyStatusChange("CUS-1002", CustomerStatus.PROSPECT, CustomerStatus.ACTIVE);
     }
 }
