@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Northstar CRM Customers API
   version: 1.0.0
-  description: TODO — Customer collection and item contract for Angular clients
+  description: Customer collection and item contract for the Northstar Angular CRM client
 servers:
   - url: http://localhost:8080
     description: Local Spring Boot
@@ -90,7 +90,7 @@ paths:
         '404':
           $ref: '#/components/responses/Error'
     put:
-      summary: TODO — replace customer
+      summary: Replace customer
       parameters:
         - $ref: '#/components/parameters/CorrelationId'
         - name: customerId
@@ -109,7 +109,7 @@ paths:
         '404':
           $ref: '#/components/responses/Error'
     delete:
-      summary: TODO — delete customer
+      summary: Delete customer
       parameters:
         - $ref: '#/components/parameters/CorrelationId'
         - name: customerId
@@ -120,6 +120,41 @@ paths:
         '204':
           description: Deleted
         '404':
+          $ref: '#/components/responses/Error'
+  /api/v1/customers/{customerId}/status:
+    patch:
+      summary: Change customer status
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+        - name: customerId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [status]
+              properties:
+                status: { type: string, enum: [ACTIVE, PROSPECT] }
+            examples:
+              activateRavi:
+                value:
+                  status: ACTIVE
+      responses:
+        '200':
+          description: Status updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '400':
+          $ref: '#/components/responses/Error'
+        '404':
+          $ref: '#/components/responses/Error'
+        '409':
           $ref: '#/components/responses/Error'
 components:
   parameters:
