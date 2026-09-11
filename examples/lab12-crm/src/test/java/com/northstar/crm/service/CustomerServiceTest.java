@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-/** Characterization / target-API tests — fail until refactor completes. Suite target: 6 tests. */
 class CustomerServiceTest {
 
     private CustomerService svc;
@@ -14,43 +13,58 @@ class CustomerServiceTest {
     @BeforeEach
     void setUp() {
         svc = new CustomerService();
-        // TODO: after refactor, setCorrelationId("lab-request-001") so not-found messages include it
+        svc.setCorrelationId("lab-request-001");
     }
 
     @Test
     void createAminaKhanThenGetById() {
-        // TODO: svc.createCustomer("CUS-1001", "Amina Khan", "amina.khan@example.com", null, ACTIVE)
-        // TODO: assert getCustomer returns same id (use new String("CUS-1001") to catch == bugs)
-        throw new UnsupportedOperationException("TODO: target API test");
+        Customer created = svc.createCustomer(
+                "CUS-1001", "Amina Khan", "amina.khan@example.com", null, CustomerStatus.ACTIVE);
+        assertEquals("CUS-1001", created.getCustomerId());
+        assertEquals(CustomerStatus.ACTIVE, created.getStatus());
+
+        Customer found = svc.getCustomer(new String("CUS-1001"));
+        assertEquals("Amina Khan", found.getFullName());
+        assertSame(created, found);
     }
 
     @Test
     void createRaviProspectThenActivate() {
-        // TODO: create CUS-1002 PROSPECT; updateStatus → ACTIVE; assert statuses
-        throw new UnsupportedOperationException("TODO: activate Ravi");
+        Customer ravi = svc.createCustomer(
+                "CUS-1002", "Ravi Singh", "ravi.singh@example.com", null, CustomerStatus.PROSPECT);
+        assertEquals(CustomerStatus.PROSPECT, ravi.getStatus());
+
+        Customer updated = svc.updateStatus("CUS-1002", CustomerStatus.ACTIVE);
+        assertEquals(CustomerStatus.ACTIVE, updated.getStatus());
+        assertEquals(CustomerStatus.ACTIVE, svc.getCustomer("CUS-1002").getStatus());
     }
 
     @Test
     void unknownIdThrows() {
-        // TODO: getCustomer("CUS-9999") throws IllegalArgumentException containing id + correlation
-        throw new UnsupportedOperationException("TODO: not-found test");
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+                () -> svc.getCustomer("CUS-9999"));
+        assertTrue(ex.getMessage().contains("CUS-9999"));
+        assertTrue(ex.getMessage().contains("lab-request-001"));
     }
 
     @Test
     void duplicateIdThrows() {
-        // TODO: second create CUS-1001 throws IllegalStateException
-        throw new UnsupportedOperationException("TODO: duplicate test");
+        svc.createCustomer("CUS-1001", "Amina Khan", "amina.khan@example.com", null, CustomerStatus.ACTIVE);
+        assertThrows(IllegalStateException.class, () ->
+                svc.createCustomer("CUS-1001", "Other", "x@example.com", null, CustomerStatus.PROSPECT));
+        assertEquals("Amina Khan", svc.getCustomer("CUS-1001").getFullName());
     }
 
     @Test
     void blankCustomerIdThrows() {
-        // TODO: createCustomer(" ", ...) throws IllegalArgumentException
-        throw new UnsupportedOperationException("TODO: blank id");
+        assertThrows(IllegalArgumentException.class, () ->
+                svc.createCustomer(" ", "Amina Khan", "amina.khan@example.com", null, CustomerStatus.ACTIVE));
     }
 
     @Test
     void updateUnknownThrowsWithCorrelation() {
-        // TODO: updateStatus("CUS-9999", ACTIVE) message contains lab-request-001
-        throw new UnsupportedOperationException("TODO: update unknown + correlation");
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+                () -> svc.updateStatus("CUS-9999", CustomerStatus.ACTIVE));
+        assertTrue(ex.getMessage().contains("lab-request-001"));
     }
 }

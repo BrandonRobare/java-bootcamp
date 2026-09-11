@@ -19,8 +19,8 @@
 | Get, unknown id | `WARN getCustomer miss correlationId=lab-request-001 customerId=CUS-9999` |
 | Update | `INFO updateStatus ok correlationId=lab-request-001 customerId=CUS-1002 from=PROSPECT to=ACTIVE` |
 
-Ids and status values only. No `Customer` object in a log line, because its `toString` carries
-the email and phone with it.
+Ids and status values only. `Customer.toString` already excludes `email` and `phone`, but it
+does include `fullName`, so log the `customerId` rather than the object.
 
 ## Step 3: One-liner rule
 
