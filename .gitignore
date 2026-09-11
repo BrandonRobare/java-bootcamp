@@ -4,6 +4,7 @@
 .idea/
 *.iml
 .vscode/
+.github/copilot-instructions.md
 
 # macOS
 .DS_Store
