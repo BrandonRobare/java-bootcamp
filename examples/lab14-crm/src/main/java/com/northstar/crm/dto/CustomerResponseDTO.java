@@ -3,14 +3,14 @@ package com.northstar.crm.dto;
 import java.time.LocalDateTime;
 
 public class CustomerResponseDTO {
+    // no validation on response DTO
     private String customerId;
     private String fullName;
     private String email;
     private String status;
     private LocalDateTime createdAt;
 
-    // TODO: factory of(...) that never exposes entity internals
-
+    // DONE: factory of(...) that never exposes entity internals
     public static CustomerResponseDTO of(String customerId, String fullName, String email,
                                          String status, LocalDateTime createdAt) {
         CustomerResponseDTO dto = new CustomerResponseDTO();

@@ -7,6 +7,8 @@ import jakarta.validation.Validator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.util.Set;
+
+import static com.northstar.crm.entity.CustomerStatus.ACTIVE;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerRequestValidationTest {
@@ -19,19 +21,35 @@ class CustomerRequestValidationTest {
 
     @Test
     void validAminaRequestPasses() {
-        // TODO: build valid DTO for CUS-1001; assert violations empty
-        throw new UnsupportedOperationException("TODO: valid request");
+        // DONE: build valid DTO for CUS-1001; assert violations empty
+        CustomerRequestDTO request = new CustomerRequestDTO(
+                "CUS-1001",
+                "Amina Khan",
+                "amina.khan@example.com",
+                "ACTIVE");
+        assertTrue(validator.validate(request).isEmpty());
     }
 
     @Test
     void invalidEmailFails() {
-        // TODO: bad email → assert violations mention email
-        throw new UnsupportedOperationException("TODO: invalid email");
+        // DONE: bad email → assert violations mention email
+        CustomerRequestDTO request = new CustomerRequestDTO(
+                "CUS-1001",
+                "Amina Khan",
+                "badEmail",
+                "ACTIVE");
+        assertTrue(validator.validate(request).stream()
+                .anyMatch(v -> v.getPropertyPath().toString().equals("email")));
     }
 
     @Test
     void blankNameFails() {
-        // TODO: blank fullName → assert violation
-        throw new UnsupportedOperationException("TODO: blank name");
+        // DONE: blank fullName → assert violation
+        CustomerRequestDTO request = new CustomerRequestDTO(
+                "CUS-1001",
+                " ",
+                "amina.khan@example.com",
+                "ACTIVE");
+        assertFalse(validator.validate(request).isEmpty());
     }
 }
